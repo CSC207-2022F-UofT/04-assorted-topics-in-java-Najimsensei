@@ -10,6 +10,7 @@
  * Go through the TODOs below and complete them.
  */
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +35,18 @@ public class Trader<T> {
         this.wishlist = wishlist;
         this.money = money;
     }
-
+    public Trader(int money){
+        this.inventory = new ArrayList<T>();
+        this.wishlist = new ArrayList<T>();
+        this.money = money;
+    }
     /* TODO: Add a new constructor that takes a single argument
      *       representing the Trader's money. Give the Trader
      *       empty ArrayLists for their inventory and wishlist.
      */
-
-
-
+    public void addToWishlist(T item){
+        this.wishlist.add(item);
+    }
 
 
     /* TODO: Implement the method addToWishlist that takes an
@@ -50,7 +55,12 @@ public class Trader<T> {
 
 
 
-
+    public int getSellingPrice(T item){
+        if(!(item instanceof Tradable)){
+            return Tradable.MISSING_PRICE;
+        }
+        return ((Tradable) item).getPrice();
+    }
 
     /* TODO: Implement the method getSellingPrice that takes an
      *       object of type T and returns the object's price
